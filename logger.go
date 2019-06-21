@@ -101,10 +101,10 @@ func Init(name string, verbose, systemLog bool, logFile io.Writer) *Logger {
 	}
 
 	l := Logger{
-		infoLog:    log.New(io.MultiWriter(iLogs...), tagInfo, flags),
-		warningLog: log.New(io.MultiWriter(wLogs...), tagWarning, flags),
-		errorLog:   log.New(io.MultiWriter(eLogs...), tagError, flags),
-		fatalLog:   log.New(io.MultiWriter(eLogs...), tagFatal, flags),
+		infoLog:    log.New(io.MultiWriter(iLogs...), name+" "+tagInfo, flags),
+		warningLog: log.New(io.MultiWriter(wLogs...), name+" "+tagWarning, flags),
+		errorLog:   log.New(io.MultiWriter(eLogs...), name+" "+tagError, flags),
+		fatalLog:   log.New(io.MultiWriter(eLogs...), name+" "+tagFatal, flags),
 	}
 	for _, w := range []io.Writer{logFile, il, wl, el} {
 		if c, ok := w.(io.Closer); ok && c != nil {
